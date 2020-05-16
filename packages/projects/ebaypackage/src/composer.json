@@ -1,5 +1,5 @@
 {
-    "name": "constacloud/ebay",
+    "name": "constacloud/ebay-sdk",
     "description": "A simple Laravel package for ebay.",
     "type": "project",
     "license": "MIT",
