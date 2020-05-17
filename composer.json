@@ -1,8 +1,6 @@
 {
     "name": "constacloud/ebay-sdk",
     "description": "A simple Laravel package for ebay.",
-    "type": "project",
-    "license": "MIT",
     "authors": [
         {
             "name": "consta clou",
