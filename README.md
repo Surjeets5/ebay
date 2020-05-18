@@ -33,7 +33,7 @@ public function getInventoryItems(){
 }
 ```
 
-### Get Inventory Items
+### Get Inventory Item
 ```php
 public function getInventoryItem(){
     $token = 'your_token';
