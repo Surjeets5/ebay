@@ -1,11 +1,11 @@
 <?php
 
-namespace ebaypackage;
+namespace Ebaypackage;
 
-class ebay
+class Ebay
 {
 
-    public function getEbayOrders($token)
+    public function getEbayOrders($token,$environment,$creationdate,$limit,$offset)
     {
         if(!$token){
             $error_response = '{
@@ -13,8 +13,29 @@ class ebay
                     "message": "Please enter vaild Token"
             }';
             return $error_response;
+        }else if(!$environment){
+            $error_response = '{
+                "category": "REQUEST",
+                "message": "Please enter vaild Environment"
+            }';
+            return $error_response;
+        }else{
+            if($environment != 'sandbox'){
+                $environment='';
+            }
+            if(!$creationdate){
+                $url = "https://api."."$environment".".ebay.com/sell/fulfillment/v1/order?";
+            }else{
+                $url = "https://api."."$environment".".ebay.com/sell/fulfillment/v1/order?filter=creationdate:"."$creationdate";
+            }
+            if($limit){
+                $url = "$url"."&limit="."$limit";
+                if($offset){
+                    $url =  "$url"."&offset="."$offset";
+                }
+            }
+           
         }
-        $url = "https://api.sandbox.ebay.com/sell/fulfillment/v1/order";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -32,7 +53,7 @@ class ebay
         return $result;
     }
 
-    public function getEbayInventoryItems($token)
+    public function getEbayInventoryItems($token,$environment,$limit,$offset)
     {
         if(!$token){
             $error_response = '{
@@ -40,8 +61,24 @@ class ebay
                     "message": "Please enter vaild Token"
             }';
             return $error_response;
+        }else if(!$environment){
+            $error_response = '{
+                "category": "REQUEST",
+                "message": "Please enter vaild Environment"
+            }';
+            return $error_response;
+        }else{
+            if($environment != 'sandbox'){
+                $environment='';
+            }
+                $url = "https://api."."$environment".".ebay.com/sell/inventory/v1/inventory_item?";
+            if($limit){
+                $url = "$url"."&limit="."$limit";
+                if($offset){
+                    $url =  "$url"."&offset="."$offset";
+                }
+            }
         }
-        $url = "https://api.sandbox.ebay.com/sell/inventory/v1/inventory_item?limit=20&offset=0";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -59,7 +96,7 @@ class ebay
         return $result;
     }
 
-    public function createOrUpdateInventoryItem($token,$sku,$requestProductData)
+    public function createOrUpdateInventoryItem($token,$environment,$sku,$requestProductData)
     {
         if(!$token){
             $error_response = '{
@@ -79,8 +116,13 @@ class ebay
                 "message": "Request data can not be null"
             }';
             return $error_response;
+        }else{
+            if($environment != 'sandbox'){
+                $environment='';
+            }
+            $url = "https://api."."$environment".".ebay.com/sell/inventory/v1/inventory_item/".$sku;
         }
-        $url = "https://api.sandbox.ebay.com/sell/inventory/v1/inventory_item/".$sku;
+        // $url = "https://api.sandbox.ebay.com/sell/inventory/v1/inventory_item/".$sku;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

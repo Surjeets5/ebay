@@ -1,16 +1,16 @@
 {
-    "name": "constacloud/ebay-sdk",
+    "name": "Constacloud/Ebay-sdk",
     "description": "A simple Laravel package for ebay.",
     "authors": [
         {
-            "name": "consta clou",
+            "name": "consta cloud",
             "email": "help.constacloud@gmail.com"
         }
     ],
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "ebaypackage\\": "src/"
+            "Ebaypackage\\": "src/"
         }
     },
     "require": {}
