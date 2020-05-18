@@ -21,7 +21,7 @@ public function getOrders(){
     return $ebay->getEbayOrders($token,$environment,$creationdate,$limit,$offset);
 }
 ```
-### Get Inventory Item
+### Get Inventory Items
 ```php
 public function getInventoryItems(){
     $token = 'your_token';
@@ -30,6 +30,16 @@ public function getInventoryItems(){
     $offset = '';
     $ebay = new Ebay();
     return $ebay->getEbayInventoryItems($token,$environment,$limit,$offset);
+}
+```
+
+### Get Inventory Items
+```php
+public function getInventoryItem(){
+    $token = 'your_token';
+    $environment = 'sandbox'; //or production
+    $ebay = new Ebay();
+    return $ebay->getEbayInventoryItem($token,$environment,$sku);
 }
 ```
 
